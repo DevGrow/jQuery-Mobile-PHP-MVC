@@ -1,0 +1,19 @@
+/* Derived from the Simple jQuery Mobile MVC/PHP Framework  */
+/* http://devgrow.com/jquery-mobile-php-mvc-framework/      */
+
+body { font-family: arial, sans-serif; font-size: 13px; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+p { line-height: 19px; margin: 0 0 20px; }
+
+.left { float: left; }
+.right { float: right; }
+.p10 { padding: 10px; }
+.mr10 { margin: 0 10px 0 0; }
+
+ul.simplenav { list-style-type: none; margin: 0; }
+ul.simplenav li { float: left; margin-left: 5px; }
+
+.status { padding: 5px; border: 2px solid #ccc; background: #f3f3f3; }
+.status.error { border-color: #f1e4e4; background: #fcf8f8; }
+.status.success { border-color: #e5eed7; background: #f2f7e8; }
