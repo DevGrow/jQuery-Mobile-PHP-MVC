@@ -10,6 +10,5 @@
   more complex jQuery Mobile applications that
   can benefit from an MVC architecture.
 *****************************************************/
-
 require_once('lib/config.php');
 $app = new App;

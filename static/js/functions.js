@@ -1,3 +1,3 @@
 $(document).ready(function() {        
-	// Enter necessary functions here
+	// Enter whatever JavaScript functions you need here.
 });

@@ -4,11 +4,11 @@
 	<div class="profile">
 		<p class='field'>
 			<label>Name:</label>
-			<span><?php echo $profile['name']; ?></span>
+			<span><?php __('user_name'); ?></span>
 		</p>
 		<p class='field'>
 			<label>E-mail:</label>
-			<span><?php echo $profile['email']; ?></span>
+			<span><?php __('user_email'); ?></span>
 		</p>
 		<p class='field'>
 			<label>Password:</label>

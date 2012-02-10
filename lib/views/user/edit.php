@@ -4,11 +4,11 @@
 	<form action='edit' method='post' class='register-form'>
 		<p>
 			<label for='name'>Name:</label>
-			<input type='text' name='name' class='text' id='name' value='<?php echo $user_name; ?>' />
+			<input type='text' name='name' class='text' id='name' value='<?php __('user_name'); ?>' />
 		</p>
 		<p>
 			<label for='email'>E-mail Address:</label>
-			<input type='text' name='email' class='text' id='email' value='<?php echo $user_email; ?>' />
+			<input type='text' name='email' class='text' id='email' value='<?php __('user_email'); ?>' />
 		</p>
 		<p>
 			<label for='password'>Password:</label>
