@@ -24,9 +24,8 @@
 </head>
 
 <body>
-<div data-role="page" data-theme="c">
+<div data-role="page" data-theme="c" data-add-back-btn="true"">
 	<div data-role="header" data-theme="a">
-        <a href="/" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
 		<h1><?php echo APP_NAME; ?></h1>
 	</div>
 	<div data-role="content" role="main">
