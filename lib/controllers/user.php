@@ -22,8 +22,8 @@ class User {
 		global $template, $user;
 		login_required();
 
-		$template->assign('user_name',$user->name);
-		$template->assign('user_email',$user->email);
+		$template->assign('user_name', $user->name);
+		$template->assign('user_email', $user->email);
 		$template->set_title('My Profile');
 		$template->render("user","profile",true);
 	}
@@ -63,8 +63,7 @@ class User {
 			$user->logout();
 			$template->set_msg($user->msg, $user->ok);
 		}
-		$template->set_title('Login');
-		$template->render("user","login",true);
+		return_to('user/login');
 	}
 
     /**
@@ -94,7 +93,7 @@ class User {
 				if($_POST['return_to'])
 					return_to($_POST['return_to']);
 				else
-					return_to("home");
+					return_to("site/home");
 			}
 			$template->set_msg($user->msg, $user->ok);
 			$template->assign('email',$_POST['email']);

@@ -258,7 +258,7 @@ class UserModel {
         {
             if(md5($results[0]['id'] . $results[0]['email']) == $secret) {
                 $this->user_id = $results[0]['id'];
-                $this->email = $results[0]['email'];
+                $this->email = $email;
                 $this->name = $results[0]['name'];
                 $this->ok = true;
                 $this->is_logged = true;

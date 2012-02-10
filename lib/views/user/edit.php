@@ -1,7 +1,7 @@
 
 	<h2>Update Contact Info</h2>
 	<p><strong>Note:</strong> Only enter your password if you wish to change it, otherwise leave it blank.</p>
-	<form action='edit' method='post' class='register-form'>
+	<form action='/user/edit' method='post' class='register-form'>
 		<p>
 			<label for='name'>Name:</label>
 			<input type='text' name='name' class='text' id='name' value='<?php __('user_name'); ?>' />

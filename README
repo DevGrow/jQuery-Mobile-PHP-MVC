@@ -1,14 +1,10 @@
-
 Simple jQuery Mobile MVC Framework in PHP
-=========================================
-For more information, check out the article at:
-http://devgrow.com/jquery-mobile-php-mvc-framework/
+============
 
-This is meant to serve as a simple basis for
-more complex jQuery Mobile applications that
-can benefit from an MVC architecture.
+For more information, check out the article at: http://devgrow.com/jquery-mobile-php-mvc-framework/
 
-All files are released under GPL - feel free to
-use it however you'd like.  Attribution or a link
-back to the article is appreciated but absolutely
-NOT required.
+This is meant to serve as a simple basis for more complex jQuery Mobile applications that can benefit from an MVC architecture.
+
+All files are released under GPL - feel free to use it however you'd like.  Attribution or a link back to the article is appreciated but absolutely NOT required.
+
+The current version uses PHP PDO to connect to an SQLite database.

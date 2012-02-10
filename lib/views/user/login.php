@@ -3,7 +3,7 @@
 
 	<p>Please login to view your order status or support requests.</p>
 	
-	<form method="post" action="login">
+	<form method="post" action="/user/login">
 		<div data-role="fieldcontain">
 			<label for="email" class="ui-input-text">E-mail Address:</label>
 			<input type="text" name="email" class="text" id="email" value="" />

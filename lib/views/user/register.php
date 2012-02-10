@@ -1,6 +1,6 @@
 
 	<h2>Register</h2>
-	<form action='' method='post' class='register-form'>
+	<form action='/user/register' method='post' class='register-form'>
 		<p>
 			<label for='name'>Name:</label>
 			<input type='text' name='name' class='text' id='name' value='' />
