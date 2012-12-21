@@ -27,6 +27,9 @@ class Router {
         $pos = strpos($request, '?');
         if ($pos) $request = substr($request, 0, $pos);
  
+        //In accordance with BASE_URL
+        if (BASE_URL) $request = substr($request, -strlen(BASE_URL), strlen(BASE_URL));
+        
         $this->request_uri = $request;
         $this->routes = array();
     }
