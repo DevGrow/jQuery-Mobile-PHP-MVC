@@ -16,10 +16,10 @@
 
 class App {
 
-    /**
-     * Main constructor function, used to initialize the models, connect to the DB and
-     * route the user to where they need to go.
-     */
+	/**
+	 * Main constructor function, used to initialize the models, connect to the DB and
+	 * route the user to where they need to go.
+	 */
 	function __construct(){
 		global $template, $user, $db;
 
@@ -29,10 +29,10 @@ class App {
 		// Connect to the database.
 		try {
 			// If your application uses MySQL, use the following line instead:
-			// $db = new PDO("mssql:host=$host;dbname=$dbname, $user, $pass");
-		    $db = new PDO('sqlite:' . BASE_DIR . '/db/sqlite.db');
+			// $db = new PDO("mysql:host=$host;dbname=$dbname, $user, $pass");
+			$db = new PDO('sqlite:' . BASE_DIR . '/db/sqlite.db');
 		} catch (Exception $e) {
-		    die($e);
+			die($e);
 		}
 
 		// Check to see if the 'user' table exists and if not, create it.
@@ -47,10 +47,10 @@ class App {
 		$this->router();
 	}
 
-    /**
-     * Figure out where the user is trying to get to and route them to the
-     * appropriate controller/action.
-     */
+	/**
+	 * Figure out where the user is trying to get to and route them to the
+	 * appropriate controller/action.
+	 */
 	function router() {
 
 		// Create a new Router instance.
@@ -94,24 +94,24 @@ class App {
 		}else Site::load_page('home');
 	}
 
-    /**
-     * Check to see if the proper tables exist in the database and if not,
-     * create them.
-     */
+	/**
+	 * Check to see if the proper tables exist in the database and if not,
+	 * create them.
+	 */
 	function check_db() {
 		global $db;
 
 		$sql = 'CREATE TABLE IF NOT EXISTS users ( 
-		       id INTEGER PRIMARY KEY,
-		       name TEXT,
-		       email TEXT,
-		       password TEXT,
-		       create_ip TEXT,
-		       create_date TEXT,
-		       status INTEGER
-		    )';
+				id INTEGER PRIMARY KEY,
+				name TEXT,
+				email TEXT,
+				password TEXT,
+				create_ip TEXT,
+				create_date TEXT,
+				status INTEGER
+			)';
 		$query = $db->prepare($sql);
 		$query->execute();
 	}
 }
-?>
+

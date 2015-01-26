@@ -15,9 +15,9 @@
 
 class User {
 
-    /**
-     * Default user profile page.
-     */
+	/**
+	 * Default user profile page.
+	 */
 	function index(){
 		global $template, $user;
 		login_required();
@@ -28,12 +28,12 @@ class User {
 		$template->render("user","profile",true);
 	}
 
-    /**
-     * Login page.
-     *
-     * Sends the user to the homepage if they're already logged in. If they try to
-     * login, validates their info and redirects them to homepage.
-     */
+	/**
+	 * Login page.
+	 *
+	 * Sends the user to the homepage if they're already logged in. If they try to
+	 * login, validates their info and redirects them to homepage.
+	 */
 	function login(){
 		global $user, $template;
 		if($user->is_logged)
@@ -52,11 +52,11 @@ class User {
 		$template->render("user","login",true);
 	}
 
-    /**
-     * Logout page.
-     *
-     * Simply logs the user out if they're logged in, then renders the login page.
-     */
+	/**
+	 * Logout page.
+	 *
+	 * Simply logs the user out if they're logged in, then renders the login page.
+	 */
 	function logout(){
 		global $user, $template;
 		if($user->is_logged()){
@@ -66,9 +66,9 @@ class User {
 		return_to('user/login');
 	}
 
-    /**
-     * Edit profile page.
-     */
+	/**
+	 * Edit profile page.
+	 */
 	function edit(){
 		global $user, $template;
 		login_required();
@@ -82,9 +82,9 @@ class User {
 		$template->render("user","edit",true);
 	}
 
-    /**
-     * User registration page.
-     */
+	/**
+	 * User registration page.
+	 */
 	function register(){
 		global $user, $template;
 		if($_POST){
@@ -102,5 +102,5 @@ class User {
 		$template->set_title('Register');
 		$template->render("user","register",true);
 	}
-
 }
+

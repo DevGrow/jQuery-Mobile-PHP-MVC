@@ -14,11 +14,11 @@
 
 class Site {
 
-    /**
-     * Loads a particular page from the 'site' directory in views
-     *
-     * @param   $name   The name of the page to load (should match filename)
-     */
+	/**
+	 * Loads a particular page from the 'site' directory in views
+	 *
+	 * @param   $name   The name of the page to load (should match filename)
+	 */
 	public static function load_page($name){
 		global $template;
 		$standard = array("faq", "terms", "about");
@@ -27,3 +27,4 @@ class Site {
 		$template->render("site", $name, true);
 	}
 }
+
