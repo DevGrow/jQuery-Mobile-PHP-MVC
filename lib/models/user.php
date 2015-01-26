@@ -29,7 +29,7 @@ class UserModel {
      */
     function __construct(){
         global $db;
-        
+
         $this->user_id = 0;
         $this->email = "Guest";
         $this->name = "Guest";
@@ -39,7 +39,7 @@ class UserModel {
 
         return $this->ok;
     }
-    
+
     /**
      * This function checks to see whether or not a PHP Session is set.
      */
@@ -60,7 +60,7 @@ class UserModel {
         else
             return false;
     }
-    
+
     /**
      * Create a user and by default, log them in once the account has been created.
      *
@@ -71,20 +71,18 @@ class UserModel {
     function create($info,$login = true){
         global $db;
 
-        // Escape the info fields and hash the password using the salt specified in config.php
-        $name = mysql_real_escape_string($info['name']);
-        $email = mysql_real_escape_string($info['email']);
-        $password = md5(mysql_real_escape_string($info['password']) . PASSWORD_SALT);
+        // Hash the password using the salt specified in config.php
+        $password = md5($info['password'] . PASSWORD_SALT);
 
         // If user status isn't set, assume default status (1)
-        $status = $info['status'] ? mysql_real_escape_string($info['status']) : 1;
+        $status = $info['status'] ? $info['status'] : 1;
 
         // Store the IP address that the user create's the account with.
         $create_ip = $_SERVER['REMOTE_ADDR'];
 
         // Reset flag used for error detection.
         $this->ok = false;
-        
+
         // Validate all of the user input fields.
         if(!$info['name'] || !$info['email'] || !$info['password'] || !$info['password2']){
             $this->msg = "Error! All fields are required.";
@@ -96,16 +94,16 @@ class UserModel {
             $this->msg = "Error! Please enter a valid e-mail address.";
             return false;
         }
-        
-        // Check to see if a user with that email address already exists.       
-        $query = $db->prepare("SELECT id, password FROM users WHERE email = '".mysql_real_escape_string($email)."'");
-        $query->execute();
+
+        // Check to see if a user with that email address already exists.
+        $query = $db->prepare("SELECT id, password FROM users WHERE email = :email");
+        $query->execute([':email'=>$email]);
         if($query->rowCount() == 1){
             $this->msg = "Error! E-mail address is already in use.";
         }else{
             // User doesn't exist, so create a new account!
-            $query = $db->prepare("INSERT INTO users (name,email,password,status,create_ip) VALUES ('$name','$email','$password','$status','$create_ip')");
-            $query->execute();
+            $query = $db->prepare("INSERT INTO users (name, email, password, status, create_ip) VALUES (:name, :email, :password, :status, :create_ip)");
+            $query->execute([':name'=>$info['name'],':email'=>$info['email'],':password'=>$password,':status'=>$status,':create_ip'=>$create_ip]);
             $this->msg = "User successfully added.";
             $this->ok = true;
             if($login) $this->login($info['email'],$info['password']);
@@ -113,7 +111,7 @@ class UserModel {
         }
         return false;
     }
-    
+
     /**
      * Update a user's information.
      *
@@ -125,11 +123,7 @@ class UserModel {
 
         // Reset our error detection flag, which is used to set the status message later on.
         $this->ok = false;
-        
-        // Escape variables that are present by default.
-        $name = mysql_real_escape_string($info['name']);
-        $email = mysql_real_escape_string($info['email']);
-        
+
         // Validate email address again.
         if(!$this->validEmail($info['email'])) {
             $this->msg = "Error! Please enter a valid e-mail address.";
@@ -137,7 +131,8 @@ class UserModel {
         }
 
         // Start building the SQL query with the data submitted so far.
-        $sql = "name='$name', email='$email'";
+        $sql = "name = :name, email = :email";
+        $exec = [':name'=>$info['name'], ':email'=>$info['email']];
 
         // If a password has been entered, validate it, re-hash it and add it to the SQL query.
         if($info['password']){
@@ -145,16 +140,18 @@ class UserModel {
                 $this->msg = "Error! Passwords do not match.";
                 return false;
             }
-            $password = md5(mysql_real_escape_string($info['password']) . PASSWORD_SALT);
-            $sql .= ", password='$password'";
+            $password = md5($info['password'] . PASSWORD_SALT);
+            $sql .= ", password = :password";
+            $exec[':password'] = $password;
         }
 
         // Create the finalized SQL query that will update our database.
-        $sql = "UPDATE users SET ".$sql." WHERE id = '".$this->user_id."'";
+        $sql = "UPDATE users SET ".$sql." WHERE id = :id";
+        $exec[':id'] = $this->user_id;
         $query = $db->prepare($sql);
 
         // Successfully updated the user data.
-        if($query->execute()) {
+        if($query->execute($exec)) {
             // Let the user know via a cheeky message (OK not really cheeky).
             $this->msg = "Info successfully updated.";
 
@@ -168,8 +165,8 @@ class UserModel {
             if($info['password']) setcookie("auth_secret", $password, time()+60*60*24*30, "/", COOKIE_DOMAIN);
 
             // Update local variables to reflect new changes.
-            $this->name = $name;
-            $this->email = $email;
+            $this->name = $info['name'];
+            $this->email = $info['email'];
 
             return true;
         } else {
@@ -196,15 +193,15 @@ class UserModel {
         }
 
         // Get user data using the email address supplied.
-        $query = $db->prepare("SELECT id, password, name FROM users WHERE email = '".mysql_real_escape_string($email)."'");
-        $query->execute();
+        $query = $db->prepare("SELECT id, password, name FROM users WHERE email = :email");
+        $query->execute([':email'=>$email]);
 
         // Set our user flag to false.
         $this->ok = false;
 
         // Fetch all results and process the data if the row exists.
         $results = $query->fetchAll();
-        if(count(results) == 1) {
+        if(count($results) == 1) {
             // Get the salted and hashed password stored in the database.
             $db_password = $results[0]['password'];
 
@@ -237,7 +234,7 @@ class UserModel {
         }
         return false;
     }
-    
+
     /**
      * This function checks the session/cookie info to see if it's real by comparing it
      * to what is stored in the database.
@@ -250,8 +247,8 @@ class UserModel {
         global $db;
 
         // Get the user's info from the database.
-        $query = $db->prepare("SELECT id, password, name FROM users WHERE email = '".mysql_real_escape_string($email)."'");
-        $query->execute();
+        $query = $db->prepare("SELECT id, password, name FROM users WHERE email = :email");
+        $query->execute([':email'=>$email]);
 
         $results = $query->fetchAll();
         if(count($results) == 1)
@@ -264,7 +261,7 @@ class UserModel {
                 $this->is_logged = true;
                 return true;
             }
-        }           
+        }
         return false;
     }
 
@@ -275,7 +272,7 @@ class UserModel {
         if($this->check($_SESSION['auth_email'], $_SESSION['auth_secret'])) return true;
         else return false;
     }
-    
+
     /**
      * Get a user's information from the database.
      *
@@ -292,11 +289,11 @@ class UserModel {
         if($field == "*") return $results[0];
         else return $results[0][$field];
     }
-    
+
     /**
      * Log out the current user by setting all the local variables to their
      * default values and resetting our PHP session and cookie info.
-     */ 
+     */
     function logout(){
         $this->user_id = 0;
         $this->email = "Guest";
@@ -304,7 +301,7 @@ class UserModel {
         $this->ok = true;
         $this->msg = "You have been logged out!";
         $this->is_logged = false;
-        
+
         $_SESSION['auth_email'] = "";
         $_SESSION['auth_secret'] = "";
         setcookie("auth_email", "", time() - 3600, "/", COOKIE_DOMAIN);

@@ -20,6 +20,7 @@ define("PASSWORD_SALT", "justjquerying");
 define("CACHE_ENABLE", true);
 define("BASE_DIR", dirname(dirname(__FILE__)));
 define("LIB_DIR", dirname(__FILE__));
+define("COOKIE_DOMAIN", "");
 
 // Set the default controller hte user is directed to (aka homepage).
 define('ROUTER_DEFAULT_CONTROLLER', 'site');
