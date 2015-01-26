@@ -22,7 +22,7 @@ define("BASE_DIR", dirname(dirname(__FILE__)));
 define("LIB_DIR", dirname(__FILE__));
 define("COOKIE_DOMAIN", "");
 
-// Set the default controller hte user is directed to (aka homepage).
+// Set the default controller the user is directed to (aka homepage).
 define('ROUTER_DEFAULT_CONTROLLER', 'site');
 define('ROUTER_DEFAULT_ACTION', 'home');
 
@@ -34,3 +34,4 @@ require_once(LIB_DIR."/helpers.php");
 require_once(LIB_DIR."/models/cache.php");
 require_once(LIB_DIR."/models/user.php");
 require_once(LIB_DIR."/models/template.php");
+

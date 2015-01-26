@@ -177,7 +177,7 @@ class UserModel {
     }
 
      /**
-     * Function used to let hte user login, checking their email and password against
+     * Function used to let the user login, checking their email and password against
      * what's stored in the database.
      *
      * @param   $email      The user's email address.
@@ -349,4 +349,4 @@ class UserModel {
         return $isValid;
     }
 }
-?>
+

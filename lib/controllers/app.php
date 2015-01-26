@@ -29,7 +29,7 @@ class App {
 		// Connect to the database.
 		try {
 			// If your application uses MySQL, use the following line instead:
-			// $db = new PDO("mssql:host=$host;dbname=$dbname, $user, $pass");
+			// $db = new PDO("mysql:host=$host;dbname=$dbname, $user, $pass");
 		    $db = new PDO('sqlite:' . BASE_DIR . '/db/sqlite.db');
 		} catch (Exception $e) {
 		    die($e);
@@ -114,4 +114,4 @@ class App {
 		$query->execute();
 	}
 }
-?>
+
