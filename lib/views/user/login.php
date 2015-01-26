@@ -2,7 +2,7 @@
 	<h2>Login</h2>
 
 	<p>Please login to view your order status or support requests.</p>
-	
+
 	<form method="post" action="/user/login">
 		<div data-role="fieldcontain">
 			<label for="email" class="ui-input-text">E-mail Address:</label>

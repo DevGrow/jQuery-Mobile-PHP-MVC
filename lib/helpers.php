@@ -58,4 +58,3 @@ function __($id) {
 	echo $template->variables[$id];
 }
 
-?>

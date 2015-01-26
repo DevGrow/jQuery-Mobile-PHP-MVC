@@ -1,6 +1,6 @@
 
 	<h2>Your Profile</h2>
-	
+
 	<div class="profile">
 		<p class='field'>
 			<label>Name:</label>
