@@ -22,6 +22,9 @@ define("BASE_DIR", dirname(dirname(__FILE__)));
 define("LIB_DIR", dirname(__FILE__));
 define("COOKIE_DOMAIN", "");
 
+//If site disposed in sub catalog
+define("BASE_URL", '');
+
 // Set the default controller hte user is directed to (aka homepage).
 define('ROUTER_DEFAULT_CONTROLLER', 'site');
 define('ROUTER_DEFAULT_ACTION', 'home');
