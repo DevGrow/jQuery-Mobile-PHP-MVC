@@ -6,8 +6,8 @@
 
 <!-- Stylesheets + Favicon: -->
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
-<link rel="stylesheet" href="/static/css/main.css" type="text/css" media="screen" />
-<link rel="shortcut icon" href="/static/images/favicon.ico" /> 
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/static/css/main.css" type="text/css" media="screen" />
+<link rel="shortcut icon" href="<?php echo BASE_URL; ?>/static/images/favicon.ico" /> 
 <!-- /Stylesheets + Favicon: -->
 
 <!-- JavaScript: -->
